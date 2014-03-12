@@ -1,0 +1,146 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Wikipedia.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Wikipedia</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+   
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <asp:PlaceHolder runat="server">
+            <%: Scripts.Render("~/bundles/additional") %>
+        </asp:PlaceHolder>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('textarea[data-role=wysiwyg]').wysihtml5();
+                $("textarea[data-role=markdown]").pagedownBootstrap({
+                    'sanatize': false,
+                    'help': function () { alert("Do you need help?"); },
+                    'hooks': [
+                        {
+                            'event': 'preConversion',
+                            'callback': function (text) {
+                                return text.replace(/\b(a\w*)/gi, "*$1*");
+                            }
+                        },
+                        {
+                            'event': 'plainLinkText',
+                            'callback': function (url) {
+                                return "This is a link to " + url.replace(/^https?:\/\//, "");
+                            }
+                        }
+                    ]
+                });
+                var pageContent = $('.markdown').html();
+                
+                var converter = new Markdown.Converter();
+                var htmlText = converter.makeHtml(pageContent);
+                $('.markdown').html(htmlText);
+            });
+        </script>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">Wikipedia</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/Pages/Categories">Categories</a></li>
+                        <li><a runat="server" href="~/Pages/AllPages">All Pages</a></li>
+                        <!--<li><a runat="server" href="~/About">About</a></li>
+                        <li><a runat="server" href="~/Contact">Contact</a></li>-->
+
+                        <asp:LoginView ID="LoginView1" runat="server">
+                            <RoleGroups>
+                                <asp:RoleGroup Roles="Administrators">
+                                    <ContentTemplate>
+                                        <li><a runat="server" href="~/Pages/New">New Page</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a runat="server" href="~/IdentityAccount/RoleManagement">Manage Roles</a></li>
+                                            </ul>
+                                        </li>
+                                    </ContentTemplate>
+                                </asp:RoleGroup>
+                            </RoleGroups>
+                            
+                        </asp:LoginView>
+                        
+                    </ul>
+                    <asp:LoginView ID="HeadLoginView" runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/IdentityAccount/Register">Register</a></li>
+                                <li><a href="~/IdentityAccount/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/IdentityAccount/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li>
+                                    <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut"/>
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                    <div class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <asp:TextBox runat="server" ID="Search" CssClass="form-control" placeholder="Search"/>
+                            
+                        </div>
+                        <asp:Button runat="server" OnClick="Search_Click" Text="Search" CssClass="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Wikipedia</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
