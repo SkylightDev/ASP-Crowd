@@ -1,4 +1,4 @@
-﻿<%@ Page Title="All Pages" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AllPages.aspx.cs" Inherits="Wikipedia.Pages.AllPages" %>
+﻿<%@ Page Title="Projects" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AllPages.aspx.cs" Inherits="Wikipedia.Pages.AllPages" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>

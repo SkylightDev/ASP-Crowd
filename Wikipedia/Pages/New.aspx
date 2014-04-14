@@ -1,4 +1,4 @@
-﻿<%@ Page Title="New Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="Wikipedia.Pages.New" %>
+﻿<%@ Page Title="New Project" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="New.aspx.cs" Inherits="Wikipedia.Pages.New" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %></h2>
@@ -42,15 +42,37 @@
                 
                 <textarea runat="server" class="form-control" cols="20" id="PageContent" name="PageContent" rows="2" tabindex="5" style="height: 481px;" data-role="markdown"></textarea>
                 
+                 <asp:LoginView ID="LoginView1" runat="server">
+                    
+                    <LoggedInTemplate>
+                        <div style="padding-top: 10px;" class="row">
+				            <div class="col-sm-1">
+					            <h6><a runat="server" href="~/">Cancel</a></h6>
+				            </div>
+				            <div style="text-align: right;" class="col-sm-11"><!-- Preview" -->
+					            <asp:Button runat="server" OnClick="Submit_Click" Text="Save" CssClass="btn btn-default"/>
+				            </div>
+			            </div>
+                    </LoggedInTemplate>
+                    <AnonymousTemplate>
+                        <div class="row" >
+                            <div class="col-sm-12">
+					            <h3> You must be logged in to post a project! <a href="../Account/Login.aspx">Login</a></h3>
+				            </div>
+                           
+                        </div>
+                        <div style="padding-top: 10px;" class="row">
+				            <div class="col-sm-1">
+					            <h6><a runat="server" href="~/">Cancel</a></h6>
+				            </div>
+				            <div style="text-align: right;" class="col-sm-11"><!-- Preview" -->
+					            <asp:Button runat="server" OnClick="Submit_Click" Text="Save" CssClass="btn btn-default" disabled="disabled"/>
+				            </div>
+			            </div>
+                    </AnonymousTemplate>
+                </asp:LoginView>
 
-                <div style="padding-top: 10px;" class="row">
-				    <div class="col-sm-1">
-					    <h6><a runat="server" href="~/">Cancel</a></h6>
-				    </div>
-				    <div style="text-align: right;" class="col-sm-11"><!-- Preview" -->
-					    <asp:Button runat="server" OnClick="Submit_Click" Text="Save" CssClass="btn btn-default" />
-				    </div>
-			    </div>
+                
             </div>
         </div>
     
