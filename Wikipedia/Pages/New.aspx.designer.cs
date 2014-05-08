@@ -49,6 +49,15 @@ namespace Wikipedia.Pages {
         protected global::System.Web.UI.WebControls.TextBox Tags;
         
         /// <summary>
+        /// Bounty control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Bounty;
+        
+        /// <summary>
         /// PageContent control.
         /// </summary>
         /// <remarks>
@@ -64,6 +73,6 @@ namespace Wikipedia.Pages {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginView LoginView1;
+        protected global::System.Web.UI.WebControls.LoginView LoginView;
     }
 }

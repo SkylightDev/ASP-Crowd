@@ -39,6 +39,13 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                
+                    <div class="col-sm-10">
+                        <asp:TextBox runat="server" ID="Bounty" CssClass="form-control"  placeholder="Add bounty" />
+                    
+                    </div>
+                </div>
                 
                 <textarea runat="server" class="form-control" cols="20" id="PageContent" name="PageContent" rows="2" tabindex="5" style="height: 481px;" data-role="markdown"></textarea>
                 

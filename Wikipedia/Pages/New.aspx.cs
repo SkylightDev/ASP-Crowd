@@ -43,10 +43,11 @@ namespace Wikipedia.Pages
                 /*IdentityResult result = manager.AddPassword(user.Id, password.Text);*/
 
                 string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
-                String queryStringPage = "INSERT INTO [Pages] ([Title], [Tags], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn]) VALUES (@Title, @Tags, @CreatedBy, @CreatedOn, @ModifiedBy, @ModifiedOn); SELECT @Id=SCOPE_IDENTITY();";
+                String queryStringPage = "INSERT INTO [Pages] ([Title], [Tags], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [Bounty]) VALUES (@Title, @Tags, @CreatedBy, @CreatedOn, @ModifiedBy, @ModifiedOn, @Bounty); SELECT @Id=SCOPE_IDENTITY();";
                 String queryStringPageContent = "INSERT INTO [PagesContent] ([EditedBy], [EditedOn], [VersionNumber], [Content], [PageId], [Approved]) VALUES (@EditedBy, @EditedOn, @VersionNumber, @Content, @PageId, @Approved);";
                 //
-                
+
+                string money = Bounty.Text;
                 SqlConnection myConnection = new SqlConnection(connectionString);
                 try
                 {
@@ -55,6 +56,7 @@ namespace Wikipedia.Pages
                     SqlCommand myCommandPage = new SqlCommand(queryStringPage, myConnection);
                     myCommandPage.Parameters.Add(new SqlParameter("Title", PageTitle.Text));
                     myCommandPage.Parameters.Add(new SqlParameter("Tags", Tags.Text));
+                    myCommandPage.Parameters.Add(new SqlParameter("Bounty", Int32.Parse(Bounty.Text)));
                     myCommandPage.Parameters.Add(new SqlParameter("CreatedBy", user.UserName));
                     myCommandPage.Parameters.Add(new SqlParameter("CreatedOn", DateTime.Now));
                     myCommandPage.Parameters.Add(new SqlParameter("ModifiedBy", user.UserName));

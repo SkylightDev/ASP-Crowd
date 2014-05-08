@@ -35,14 +35,18 @@
                     <RoleGroups>
                         <asp:RoleGroup Roles="Administrators">
                             <ContentTemplate>
-                                <td class="edit">
+                                <td class="edita">
                                     <!--<a runat="server" class="btn btn-mini btn-primary" href="~/Pages/Edit?">Edit</a>-->
                                     <asp:HyperLink ID="pageTitle" runat="server" Text='Edit' NavigateUrl='<%# "~/Pages/Edit?id="+ Eval("Id") %>' cssClass="btn btn-mini btn-primary" />
+                                    <asp:HyperLink ID="HyperLink1" runat="server" Text='Response' NavigateUrl='<%# "~/Pages/Response?id="+ Eval("Id") %>' cssClass="btn btn-mini btn-danger" />
                             
                                 </td>
                                 <td class="edit">
                                     <asp:HyperLink ID="deletePage" runat="server" Text='Delete' NavigateUrl='<%# "~/Pages/AllPages?delete=1&id="+ Eval("Id") %>' cssClass="btn btn-mini btn-danger" />
                                 </td>
+
+                               
+
                             </ContentTemplate>
                         </asp:RoleGroup>
                     </RoleGroups> 
@@ -52,7 +56,9 @@
                             <asp:HyperLink ID="pageTitle" runat="server" Text='Edit' NavigateUrl='<%# "~/Pages/Edit?id="+ Eval("Id") %>' cssClass="btn btn-mini btn-primary" />
                             
                         </td>
-                        <td></td>
+                        <td class="response">
+                                    <asp:HyperLink ID="Response" runat="server" Text='Response' NavigateUrl='<%# "~/Pages/Response?id="+ Eval("Id") %>' cssClass="btn btn-mini btn-danger" />
+                                </td>
                     </LoggedInTemplate>   
                     
                 </asp:LoginView>
@@ -63,8 +69,8 @@
                 
                     <tr runat="server" style="">
                         <th runat="server">Title</th>
-                        <th></th>
-                        <th></th>
+                        <th runat="server">CACA</th>
+                        <th runat="server">PIPI</th>
                     </tr>
                 
                     <tr id="itemPlaceholder" runat="server">
