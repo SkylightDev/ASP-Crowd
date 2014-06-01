@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - CrowdSource</title>
+    <title><%: Page.Title %> - ASP Crowd</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -14,6 +14,26 @@
    
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="Content/bootstrap-theme.css" />
+    <style>
+        .article-placeholder
+        {
+            margin-left: 0;
+        margin-right: 0;
+        padding:20px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        border-radius: 4px 4px 0 0;
+        box-shadow: none;
+
+        padding: 15px 15px 15px;
+        border-style: solid;
+        }
+        .navbar{
+            border-bottom: 1px solid #428bca;
+        }
+    </style>
 
 </head>
 <body>
@@ -70,7 +90,7 @@
             });
         </script>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -78,7 +98,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">CrowdSource</a>
+                    <a class="navbar-brand" runat="server" href="~/">ASP Crowd</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -138,7 +158,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - CrowdSource</p>
+                <p>&copy; <%: DateTime.Now.Year %> - ASP Crowd</p>
             </footer>
         </div>
     </form>

@@ -14,37 +14,43 @@
 
         <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="ListView1_ItemDataBound">
             <ItemTemplate>
-                <tr style="">
-                    <td class="stretch">
-                       <asp:HyperLink ID="ContentPreview" runat="server"></asp:HyperLink> - <%# Eval("EditedOn") %> -- Version <%# Eval("VersionNumber") %>
-                    </td>
+                 <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="../img/article-placeholder.gif">
+              </a>
+              &nbsp;&nbsp;&nbsp;<div class="media-body" style="float:left">
+                <h4 class="media-heading"><asp:HyperLink ID="ContentPreview" runat="server"></asp:HyperLink></h4>
+                <p><%# Eval("EditedOn") %> -- Version <%# Eval("VersionNumber") %></p>
+              </div>
+              
+              <div style="float:right">
+
+
+             
                 
                     <asp:LoginView ID="LoginView1" runat="server">
                         <LoggedInTemplate>
-                            
-                            <td class="edit" runat="server" Visible='<%# Eval("Approved").ToString().Equals("0") %>'>
-                                <!--<a runat="server" class="btn btn-mini btn-primary" href="~/Pages/Edit?">Edit</a>-->
+                            <div class="btn-group" runat="server" Visible='<%# Eval("Approved").ToString().Equals("0") %>'>
                                 <asp:HyperLink ID="ApprovePage" runat="server" Text='Approve' cssClass="btn btn-mini btn-primary" />
-                            </td>
-                            <td class="edit" runat="server" Visible='<%# Eval("Approved").ToString().Equals("1") %>'>
+                            </div>
+                            
+                            <div class="edit" runat="server" Visible='<%# Eval("Approved").ToString().Equals("1") %>'>
                                 Approved
-                            </td>
+                            </div>
                         </LoggedInTemplate>    
                     </asp:LoginView>
-                </tr>
+                </div>
+                <div style="clear:both"></div>
+            </div>
             </ItemTemplate>
             <LayoutTemplate>
-                <table id="itemPlaceholderContainer" runat="server" class="table table-striped">
+                <div id="itemPlaceholderContainer" class="article-placeholder" runat="server">
                 
-                        <tr runat="server" style="">
-                            <th runat="server">Title</th>
-                            <th></th>
-                        </tr>
+                 
+                    <div id="itemPlaceholder" runat="server">
+                    </div>
                 
-                        <tr id="itemPlaceholder" runat="server">
-                        </tr>
-                
-                </table>
+            </div>
             </LayoutTemplate>
         </asp:ListView>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ApplicationServices %>" SelectCommand="SELECT [Id], [Content], [VersionNumber], [Approved], [EditedOn], [EditedBy] FROM [PagesContent] WHERE [PageId] = @PageId ORDER BY [VersionNumber] DESC">

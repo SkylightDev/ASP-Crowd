@@ -83,7 +83,7 @@
             <p>Lorem ipsum dolor sit amet constructerur
                 
               
-                <asp:GridView ID="RoleList" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1">
+                <asp:GridView ID="RoleList" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" CssClass="table table-bordered">
                     <Columns>
                         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                     </Columns>
@@ -95,7 +95,7 @@
         <div class="col-md-6">
             <h4>Roles assigned to users</h4>
             <hr />
-            <p>Lorem ipsum dolor sit amet constructerur<asp:GridView ID="UserRoleList" runat="server" AutoGenerateColumns="False" DataKeyNames="Name,UserName" DataSourceID="SqlDataSource3">
+            <p>Lorem ipsum dolor sit amet constructerur<asp:GridView ID="UserRoleList" runat="server" AutoGenerateColumns="False" DataKeyNames="Name,UserName" DataSourceID="SqlDataSource3" CssClass="table table-bordered">
                 <Columns>
                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                     <asp:BoundField DataField="UserName" HeaderText="UserName" SortExpression="UserName" />

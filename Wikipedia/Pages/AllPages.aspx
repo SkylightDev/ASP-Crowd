@@ -25,53 +25,57 @@
     <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
         
         <ItemTemplate>
-            <tr style="">
-                <td class="stretch">
-        
-                    <asp:HyperLink ID="pageTitle" runat="server" Text='<%# Eval("Title") %>' NavigateUrl='<%# "~/Pages/View?id="+ Eval("Id") %>' />
-                </td>
+            <div class="media">
+              <a class="pull-left" href="#">
+                <img class="media-object" src="../img/article-placeholder.gif">
+              </a>
+              &nbsp;&nbsp;&nbsp;<div class="media-body" style="float:left">
+                <h4 class="media-heading"><asp:HyperLink ID="pageTitle" runat="server" Text='<%# Eval("Title") %>' NavigateUrl='<%# "~/Pages/View?id="+ Eval("Id") %>' /></h4>
+                <p>Article description</p>
+              </div>
+              
+              <div style="float:right">
                 
                 <asp:LoginView ID="LoginView1" runat="server">
                     <RoleGroups>
                         <asp:RoleGroup Roles="Administrators">
                             <ContentTemplate>
-                                <td class="edit">
-                                    <!--<a runat="server" class="btn btn-mini btn-primary" href="~/Pages/Edit?">Edit</a>-->
-                                    <asp:HyperLink ID="pageTitle" runat="server" Text='Edit' NavigateUrl='<%# "~/Pages/Edit?id="+ Eval("Id") %>' cssClass="btn btn-mini btn-primary" />
-                            
-                                </td>
-                                <td class="edit">
-                                    <asp:HyperLink ID="deletePage" runat="server" Text='Delete' NavigateUrl='<%# "~/Pages/AllPages?delete=1&id="+ Eval("Id") %>' cssClass="btn btn-mini btn-danger" />
-                                </td>
+
+                                <div class="btn-group">
+                                    <asp:HyperLink ID="pageTitle" runat="server" Text='Edit' NavigateUrl='<%# "~/Pages/Edit?id="+ Eval("Id") %>' cssClass="btn btn-sm btn-default" />
+                                    <asp:HyperLink ID="deletePage" runat="server" Text='Delete' NavigateUrl='<%# "~/Pages/AllPages?delete=1&id="+ Eval("Id") %>' cssClass="btn btn-sm btn-danger" />
+                                  
+                                </div>
+                                
                             </ContentTemplate>
                         </asp:RoleGroup>
                     </RoleGroups> 
                     <LoggedInTemplate>
-                        <td class="edit">
+                        <div class="edit">
                             <!--<a runat="server" class="btn btn-mini btn-primary" href="~/Pages/Edit?">Edit</a>-->
-                            <asp:HyperLink ID="pageTitle" runat="server" Text='Edit' NavigateUrl='<%# "~/Pages/Edit?id="+ Eval("Id") %>' cssClass="btn btn-mini btn-primary" />
                             
-                        </td>
-                        <td></td>
+                            <div class="btn-group">
+                                <asp:HyperLink ID="pageTitle" runat="server" Text='Edit' NavigateUrl='<%# "~/Pages/Edit?id="+ Eval("Id") %>' cssClass="btn btn-sm btn-primary" />
+                            </div>
+                        </div>
+                        
                     </LoggedInTemplate>   
                     
                 </asp:LoginView>
-            </tr>
+            </div>
+                <div style="clear:both"></div>
+            </div>
         </ItemTemplate>
         <LayoutTemplate>
-            <table id="itemPlaceholderContainer" runat="server" class="table table-striped">
+            <div id="itemPlaceholderContainer" class="article-placeholder" runat="server">
                 
-                    <tr runat="server" style="">
-                        <th runat="server">Title</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
+                 
+                    <div id="itemPlaceholder" runat="server">
+                    </div>
                 
-                    <tr id="itemPlaceholder" runat="server">
-                    </tr>
-                
-            </table>
+            </div>
         </LayoutTemplate>
+       
        
     </asp:ListView>
     <asp:DataPager ID="DataPager1" runat="server" PagedControlID="ListView1" PageSize="5">
